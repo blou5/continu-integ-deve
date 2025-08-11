@@ -84,4 +84,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.git_token }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.sonar_token }}
-        run: gradle build sonar --debug
+        run: gradle build sonar --scan
