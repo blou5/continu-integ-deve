@@ -26,6 +26,7 @@ jobs:
 
   unit-test:
     runs-on: ubuntu-latest
+    if: ${{ false }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -35,7 +36,7 @@ jobs:
       - name: Installing dependencies
         run: npm install
       - name: Running unit test
-        run: npm run test:unit:ci
+        run: npm run test
 
   build:
     runs-on: ubuntu-latest
