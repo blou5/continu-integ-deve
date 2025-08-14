@@ -75,33 +75,33 @@ jobs:
           tags: ${{inputs.tag}}
 
 
-#  deploy-dev:
-#    needs: docker
-#    environment: ${{inputs.environment}}
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: "Checkout"
-#        uses: actions/checkout@v4
-#        with:
-#          fetch-depth: 0
-#      - name: "verify variable"
-#        run: echo ${{inputs.environment}} || echo ${{secrets.HOST}}
-#      - name: "Deploy to dev"
-#        uses: milanmk/actions-file-deployer@master
-#        with:
-#          sync: delta
-#          remote-protocol: "sftp"
-#          remote-host: ${{secrets.HOST}}
-#          remote-user: ${{secrets.SSH_USER}}
-#          ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
-#          local-path: ${{inputs.local-path}}
-#          remote-path: ${{inputs.remote-path}}
-#
-#      - name: install ssh keys
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{secrets.HOST}}
-#          username: ${{secrets.SSH_USER}}
-#          key: ${{secrets.SSH_PRIVATE_KEY}}
-#          port: 22
-#          script: ${{inputs.deploy-script}}
+  deploy-dev:
+    needs: docker
+    environment: ${{inputs.environment}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: "verify variable"
+        run: echo ${{inputs.environment}} || echo ${{secrets.HOST}}
+      - name: "Deploy to dev"
+        uses: milanmk/actions-file-deployer@master
+        with:
+          sync: delta
+          remote-protocol: "sftp"
+          remote-host: ${{secrets.HOST}}
+          remote-user: ${{secrets.SSH_USER}}
+          ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
+          local-path: ${{inputs.local-path}}
+          remote-path: ${{inputs.remote-path}}
+
+      - name: install ssh keys
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.HOST}}
+          username: ${{secrets.SSH_USER}}
+          key: ${{secrets.SSH_PRIVATE_KEY}}
+          port: 22
+          script: ${{inputs.deploy-script}}
